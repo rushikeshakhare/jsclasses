@@ -6,6 +6,47 @@
     <title>Document</title>
 </head>
 <body>
-    untracked - staged - committed
+   <script>
+
+       const inventoryList = () =>{
+        const inventory = [];
+
+        const addItem = (name) => {
+            inventory.push(name)
+        }
+
+        const removeItem = (name) => {
+            const itemIndex = inventory.findIndex((element) => element === name);
+            if(itemIndex > -1)
+                inventory.filter((item,index) => index !== itemIndex)
+        }
+
+        const getList = () => {
+            return inventory
+        }
+
+        return {
+            add:addItem,
+            remove:removeItem,
+            getList
+        }
+       }
+
+     function main(commands){
+      commands.forEach((command) => {
+         const currentCommand = command.split(' ')[0];
+        if(currentCommand === 'add'){
+
+        }else if(currentCommand === 'remove'){
+
+        }else if(currentCommand === 'list'){
+            
+        }
+    })
+     }
+
+     main(['add Shirt','add Trouser','add Tshirt','add Hat','remove Hat']);
+
+   </script>
 </body>
 </html>
