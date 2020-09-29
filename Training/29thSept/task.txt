@@ -1,0 +1,9 @@
+Requirements
+1. We have to build a program for storing items and its count
+2. commands will be like 
+add (ItemName) eg add Table
+updateCount (ItemName) (count) updateCount Table 23
+removeItem (ItemName) removeItem Table
+listItem (ItemName) listItem Table output - Table 23
+listAllItems listAllItems output - Table 23 
+                                   Chair 34
