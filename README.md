@@ -3,6 +3,7 @@ Stages of git
 
 Untracked -> Staged -> Committed
 
+git checkout -b yourname - one time
 git pull origin master - pulling changes from repository
 git status - For checking status for files
 git add . - for moving files from untracked to staged
