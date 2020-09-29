@@ -1,0 +1,25 @@
+.container{
+   margin: auto;
+   text-align: center;
+}
+.container .container-header{
+    margin-bottom:20px;
+}
+
+.container .container-header button{
+  padding:20px;
+  font-size: 18px;
+  border:none;
+  background-color: #00c853;
+  color:white;
+  border-radius: 5px;
+  width: 100px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.container .container-header button:active{
+
+    background-color:#00e676;
+
+  }
