@@ -34,27 +34,24 @@
     <!-- Array Challaenge -->
     <script>
         console.log("Yash I");
-        let Inventory = [];
         const InventoryList = () => {
+        const Inventory = [];
 
             const AddItem = (name) => {
                 const repeat = Inventory.filter((elem) => elem == name);
                 if (repeat == '') {
                     Inventory.push(name);
-                } else {
-                    console.log("This Item :", repeat ," is already in the list." );
-                }
-                console.log(Inventory);
+                } 
+                
             }
             const RemoveItem = (name) => {
                 n = Inventory.findIndex((element) => element == name);
                 if (n > -1) {
-                    Inventory = Inventory.filter((elem) => elem !== name);
-                    console.log(Inventory);
-                } else return "this item is not belong to us.";
+                     Inventory.splice(n,1);  
+                }  
             }
             const showList = () => {
-                console.log(Inventory);
+                return Inventory;
             }
             return {
                 add: AddItem,
@@ -64,15 +61,16 @@
         }
 
         function main(commands) {
+            const InventoryObject =InventoryList();
             commands.forEach((command) => {
                 const Item = command.split(" ")[1];
                 const currentCommand = command.split(" ")[0].toLowerCase();
                 if (currentCommand === "add") {
-                    return InventoryList().add(Item);
+                    return InventoryObject.add(Item);
                 } else if (currentCommand === "remove") {
-                    return InventoryList().remove(Item);
+                    return InventoryObject.remove(Item);
                 } else if (currentCommand === "list") {
-                    return InventoryList().list();
+                     console.log(InventoryObject.list());
                 } else {
                     return "Invalid Comment";
                 }

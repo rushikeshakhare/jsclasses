@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+<style>
+
+</style>
+
+<body>
+
+    <h1>
+        Task
+    </h1>
+    <!-- <pre>
+        Requirements
+
+        1. We have to build a program for storing items and its count
+
+        2. commands will be like 
+
+        - add (ItemName) eg add Table
+        
+        - updateCount (ItemName) (count) updateCount Table 23
+            
+        - removeItem (ItemName) removeItem Table
+            
+        - listItem (ItemName) listItem Table output - Table 23
+            
+        - listAllItems listAllItems output - Table 23 
+    </pre> -->
+    <script>
+        // console.log("Yash mahalle");
+        const stock = () => {
+            const List = [];
+
+            const addItem = (item) => {
+                if (item.count == undefined) {
+                    item.count = 1;
+                }
+                const repeat = List.filter((element) => element.name === item.name)
+                if (repeat == '') {
+                    List.push(item)
+                } else {
+                    List.map((element) => {
+                        if (element.name === item.name) {
+                            element.count++;
+                        }
+                    })
+                }
+            }
+            const updateCount = (item) => {
+                List.forEach((element) => {
+                    if (item.name === element.name) {
+                        const c = typeof element.count;
+                        element.count = element.count + parseInt(item.count);
+                    }
+                })
+            }
+            const removeItem = (item) => {
+                const index = List.findIndex((element) => element.name === item.name)
+                if (index > -1) {
+                    List.splice(index, 1);
+                }
+                 
+            }
+            const listItem = (item) => {
+                return List.filter((element) => element.name === item.name)
+            }
+            const listAllItems = () => {
+                return List;
+            }
+            return {
+                Add: addItem,
+                updateCount,
+                remove: removeItem,
+                listItem,
+                listAll: listAllItems
+            }
+        }
+
+        function operate(commands) {
+            const stovkobj = stock();
+            commands.forEach((command) => {
+                const name = command.split(" ")[1];
+                const count = command.split(" ")[2];
+                const currentCommand = command.split(" ")[0].toLowerCase();
+                const Item = {
+                    name: name,
+                    count: count
+                };
+                if (currentCommand === "add") {
+                    return stovkobj.Add(Item);
+                }
+                if (currentCommand === "updatecount") {
+                    return stovkobj.updateCount(Item);
+                }
+                if (currentCommand === "remove") {
+                    return stovkobj.remove(Item);
+                }
+                if (currentCommand === "listitem") {
+                    console.log("List of the ",Item.name," :",stovkobj.listItem(Item));
+                }
+                if (currentCommand === "listallitem") {
+                    console.log("List of all Items :", stovkobj.listAll());
+                }
+            })
+
+        }
+        operate(['Add chair', 'Add sofa 12', 'Add table 17', 'remove table', 'listItem chair', 'updateCount chair 12', 'Add chair', 'listAllItem'])
+    </script>
+    <!-- <script>
+        console.log("Yash I");
+        const InventoryList = () => {
+            const Inventory = [];
+
+            const AddItem = (item) => {
+                console.log(item);
+                // const repeat = Inventory.filter((elem) => elem.name == item.name);
+                // if (repeat == '') {
+                //     Inventory.push(item);
+                // }
+                if (!(Inventory.includes(item.name))) {
+                    Inventory.push(item);
+                }
+
+            }
+            const RemoveItem = (name) => {
+                n = Inventory.findIndex((element) => element == name);
+                if (n > -1) {
+                    Inventory.splice(n, 1);
+                }
+            }
+            const showList = () => {
+                return Inventory;
+            }
+            return {
+                add: AddItem,
+                remove: RemoveItem,
+                list: showList
+            }
+        }
+
+        function main(commands) {
+            const InventoryObject = InventoryList();
+            commands.forEach((command) => {
+                const name = command.split(" ")[1];
+                const count = command.split(" ")[2];
+                const currentCommand = command.split(" ")[0].toLowerCase();
+                const Item = {
+                    name: name,
+                    count: count
+                };
+                if (currentCommand === "add") {
+                    return InventoryObject.add(Item);
+                } else if (currentCommand === "remove") {
+                    return InventoryObject.remove(Item);
+                } else if (currentCommand === "list") {
+                    console.log(InventoryObject.list());
+                } else {
+                    return "Invalid Comment";
+                }
+            })
+        }
+        main(['Add chair', 'Add sofa 12', 'Add chair', 'Add chair', 'list']);
+    </script> -->
+</body>
+
+</html>
