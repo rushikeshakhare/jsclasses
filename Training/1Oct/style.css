@@ -1,0 +1,66 @@
+.boundary-box{
+    width:500px;
+    height:500px;
+    margin:auto;
+    box-shadow: 2px 2px 10px rgb(167, 167, 167);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    overflow: hidden;
+}
+
+.boundary-box  img{
+    width:150px;
+    height:150px;  
+    transition: 300ms;
+}
+.controls{
+    width:200px;
+    height:200px;
+    position: absolute;
+    right:20px;
+    box-shadow: 2px 2px 10px rgb(167, 167, 167);
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.controls button{
+    font-size:30px;
+    font-weight: bold;
+    background-color: transparent;
+    border:none;
+    cursor: pointer;
+    outline: none;
+    transition: 50ms;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+
+.controls button:active{
+    background: black;
+    color:white;
+}
+.controls button.left-button{
+    margin-right:20px;
+   
+ }
+
+ .controls button.right-button{
+    margin-left:20px;
+   
+ }
+
+.controls button.up-button{
+   transform:rotateZ(-90deg);
+  
+}
+
+.controls button.down-button{
+    transform:rotateZ(90deg);
+ }
