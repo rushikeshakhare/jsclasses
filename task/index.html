@@ -10,8 +10,15 @@
     const options = ()=>{
         let List = [];
         const additems = (item)=>{
-           item.count = 0;
+          let check =  List.filter((element)=>element.itemName === item.itemName && element.count === 0);
+          if(check == ""){
+            item.count = 0;
             List.push(item);
+          }else{
+              console.log("Can't Push");
+          }
+
+           
                
         }; 
         const listItems = (item)=>{
@@ -82,7 +89,8 @@
             }
         });
     }
-    main(["add Table","add Chair","updatecount Man 23","listItem Chair","listAllItems","removeItem Chair","listAllItems"]);
+    main(["add Table","add Table","listAllItems"]);
+  //  main(["add Table","add Chair","updatecount Man 23","listItem Chair","listAllItems","removeItem Chair","listAllItems"]);
    </script>
 </body>
 </html>
