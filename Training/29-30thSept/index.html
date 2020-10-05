@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>HTML CSS</title>
+    <style>
+        *{
+           
+  font-family: 'Roboto', sans-serif;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container-header">
+            <button type="button" id="restart-button">Restart</button>
+            <button type="button" id="previous-button">Prev</button>
+            <button type="button" id="next-button">Next</button>
+        </div>
+        <div class="container-content" id="content">
+           <h4 id="slide-no"></h4>
+           <h1 id="slide-title"></h1>
+           <p id="slide-text"></p>
+        </div>
+    </div>
+    <script>
+        const contentArray  = [{
+        title:'C Programming Language',
+        text:'It is a procedural language'
+        },
+        {
+        title:'Javascript',
+        text:'Has Prototypal Inhertitence'
+        },
+        {
+        title:'Python',
+        text:'Same scripting language like javascript'
+        },{
+        title:'Dart',
+        text:'Language to write native apps with flutter'
+        }];
+
+        let currentContent = 0;
+        const restartButton = document.getElementById('restart-button');
+        const previousButton = document.getElementById('previous-button');
+        const nextButton = document.getElementById('next-button');
+        const contentContainer = document.getElementById('content');
+        const slideNo = document.getElementById('slide-no');
+        const slideTitle = document.getElementById('slide-title');
+        const slideText = document.getElementById('slide-text');
+
+
+        const getCurrenContentData = () => {
+            return contentArray[currentContent];
+        }
+
+        const setCurrentContentData = () => {
+            const contentObject = getCurrenContentData();
+            slideNo.textContent = `Slide #${currentContent+1}`;
+            slideTitle.textContent = contentObject.title;
+            slideText.textContent = contentObject.text;
+        }
+
+        const setButtonsStatus = () => {
+            if(currentContent === 0){
+                previousButton.setAttribute('disabled',true);
+                restartButton.setAttribute('disabled',true);
+                nextButton.removeAttribute('disabled'); 
+            }else if(currentContent === (contentArray.length - 1)){
+                nextButton.setAttribute('disabled',true);
+            }else {
+                previousButton.removeAttribute('disabled');
+                restartButton.removeAttribute('disabled'); 
+                nextButton.removeAttribute('disabled'); 
+            }
+        }
+
+        const onPageLoad = () => {
+            setCurrentContentData();
+            setButtonsStatus();
+        }
+
+        const onNextButtonClick = () => {
+            currentContent++;
+            setCurrentContentData();
+            setButtonsStatus();
+        }
+
+        const onPreviousButtonClick = () => {
+            currentContent--;
+            setCurrentContentData();
+            setButtonsStatus();
+        }
+
+        const onRestartButtonClick = () => {
+            currentContent = 0;
+            setCurrentContentData();
+            setButtonsStatus();
+        }
+
+        window.onload = onPageLoad;
+        nextButton.onclick = onNextButtonClick;
+        previousButton.onclick = onPreviousButtonClick;
+        restartButton.onclick = onRestartButtonClick;
+    </script>
+</body>
+</html>

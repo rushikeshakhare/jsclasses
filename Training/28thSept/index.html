@@ -6,19 +6,21 @@
     <title>Document</title>
 </head>
 <body>
+    
    <script>
 
-       const inventoryList = () =>{
+       const inventoryList = () => {
         const inventory = [];
 
         const addItem = (name) => {
-            inventory.push(name)
+            if(!(inventory.includes(name)))
+                inventory.push(name)
         }
 
         const removeItem = (name) => {
             const itemIndex = inventory.findIndex((element) => element === name);
             if(itemIndex > -1)
-                inventory.filter((item,index) => index !== itemIndex)
+                inventory.splice(itemIndex,1)
         }
 
         const getList = () => {
@@ -33,20 +35,22 @@
        }
 
      function main(commands){
-      commands.forEach((command) => {
-         const currentCommand = command.split(' ')[0];
-        if(currentCommand === 'add'){
-
-        }else if(currentCommand === 'remove'){
-
-        }else if(currentCommand === 'list'){
-            
-        }
-    })
+        const inventoryObject = inventoryList();
+        commands.forEach((command) => {
+            const allParameters = command.split(' ');
+            const currentCommand = allParameters[0];
+            const currentParameter = allParameters[1];
+            if(currentCommand === 'add'){
+                inventoryObject.add(currentParameter)
+            }else if(currentCommand === 'remove'){
+                inventoryObject.remove(currentParameter)
+            }else if(currentCommand === 'list'){
+                console.log(inventoryObject.getList());
+            }
+        })
      }
 
-     main(['add Shirt','add Trouser','add Tshirt','add Hat','remove Hat']);
-
+     main(['add Shirt','add trouser','add Tshirt','add Hat','remove Hat','list']);
    </script>
 </body>
 </html>

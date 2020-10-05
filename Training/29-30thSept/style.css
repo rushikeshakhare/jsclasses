@@ -1,0 +1,44 @@
+
+
+.container{
+   margin: auto;
+   text-align: center;
+}
+.container .container-header{
+    margin-bottom:20px;
+}
+
+.container .container-header button{
+  padding:15px;
+  font-size: 18px;
+  border:none;
+  background-color: #00c853;
+  color:white;
+  border-radius: 5px;
+  width: 100px;
+  cursor: pointer;
+  transition: 150ms;
+  outline:none;
+  user-select: none;
+}
+
+.container .container-header button:active{
+    background-color:#00e676;
+  }
+
+  .container .container-header button:disabled{
+    border:1px solid #00e676;
+    background-color: white;
+    color:black;
+    cursor: not-allowed;
+  }
+
+  .container .container-content{
+    padding:20px;
+    text-align: center;
+    width:500px;
+    height:500px;
+    margin: auto;
+    box-shadow: 2px 2px 10px rgb(155, 155, 155);
+    
+  }
