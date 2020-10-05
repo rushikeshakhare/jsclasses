@@ -39,7 +39,6 @@
         // console.log("Yash mahalle");
         const stock = () => {
             const List = [];
-
             const addItem = (item) => {
                 if (item.count == undefined) {
                     item.count = 1;
@@ -58,8 +57,8 @@
             const updateCount = (item) => {
                 List.forEach((element) => {
                     if (item.name === element.name) {
-                        const c = typeof element.count;
-                        element.count = element.count + parseInt(item.count);
+                        element.count = item.count;
+                        // element.count = element.count + parseInt(item.count);
                     }
                 })
             }
@@ -68,7 +67,7 @@
                 if (index > -1) {
                     List.splice(index, 1);
                 }
-                 
+
             }
             const listItem = (item) => {
                 return List.filter((element) => element.name === item.name)
@@ -86,11 +85,12 @@
         }
 
         function operate(commands) {
-            const stovkobj = stock();
+            // const stovkobj = stock();
             commands.forEach((command) => {
+
+                const currentCommand = command.split(" ")[0].toLowerCase();
                 const name = command.split(" ")[1];
                 const count = command.split(" ")[2];
-                const currentCommand = command.split(" ")[0].toLowerCase();
                 const Item = {
                     name: name,
                     count: count
@@ -105,13 +105,12 @@
                     return stovkobj.remove(Item);
                 }
                 if (currentCommand === "listitem") {
-                    console.log("List of the ",Item.name," :",stovkobj.listItem(Item));
+                    console.log("List of the ", Item.name, " :", stovkobj.listItem(Item));
                 }
                 if (currentCommand === "listallitem") {
                     console.log("List of all Items :", stovkobj.listAll());
                 }
             })
-
         }
         operate(['Add chair', 'Add sofa 12', 'Add table 17', 'remove table', 'listItem chair', 'updateCount chair 12', 'Add chair', 'listAllItem'])
     </script>
@@ -171,5 +170,4 @@
         main(['Add chair', 'Add sofa 12', 'Add chair', 'Add chair', 'list']);
     </script> -->
 </body>
-
 </html>
