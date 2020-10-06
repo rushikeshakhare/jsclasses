@@ -37,137 +37,102 @@
     </pre> -->
     <script>
         // console.log("Yash mahalle");
-        const stock = () => {
-            const List = [];
+        const inventoryList = () => {
+            const inventory = [];
             const addItem = (item) => {
-                if (item.count == undefined) {
-                    item.count = 1;
-                }
-                const repeat = List.filter((element) => element.name === item.name)
-                if (repeat == '') {
-                    List.push(item)
-                } else {
-                    List.map((element) => {
-                        if (element.name === item.name) {
-                            element.count++;
-                        }
+                if (!(inventory.includes((element) => element.name === item))) {
+                    inventory.push({
+                        name: item,
+                        count: 0
                     })
+                } else {
+                    console.log(`Item ${item} already Exists.`)
                 }
+
+                //     console.log(inventory);
+                // if (item.count == undefined) {
+                //     item.count = 0;
+                // }
+                // const repeat = inventory.filter((element) => element.name === item.name)
+                // if (repeat == '') {
+                //     inventory.push(item)
+                // }
+
             }
-            const updateCount = (item) => {
-                List.forEach((element) => {
-                    if (item.name === element.name) {
-                        element.count = item.count;
-                        // element.count = element.count + parseInt(item.count);
-                    }
-                })
+            const updateCount = (name, count) => {
+                const index = inventory.findIndex((element) => element.name === name)
+                if (index > -1) {
+                    inventory[index].count = count;
+                } else {
+                    console.log("element not found")
+                }
+                // inventory.forEach((element) => {
+                //     if (item.name === element.name) {
+                //         element.count = item.count;
+                //     }
+                // })
             }
             const removeItem = (item) => {
-                const index = List.findIndex((element) => element.name === item.name)
+                const index = inventory.findIndex((element) => element.name === item)
                 if (index > -1) {
-                    List.splice(index, 1);
+                    inventory.splice(index, 1);
                 }
 
             }
-            const listItem = (item) => {
-                return List.filter((element) => element.name === item.name)
+            const inventoryItem = (item) => {
+                // return inventory.filter((element) => element.name === item.name)
+                const index = inventory.findIndex((element) => element.name === item)
+                if (index > -1) {
+                    return inventory[index];
+                } else {
+                    console.log(`element ${item} not found`)
+                }
             }
-            const listAllItems = () => {
-                return List;
+            const inventoryAllItems = () => {
+                return inventory.length ? inventory : "NO items found.";
             }
             return {
                 Add: addItem,
                 updateCount,
-                remove: removeItem,
-                listItem,
-                listAll: listAllItems
-            }
-        }
-
-        function operate(commands) {
-            // const stovkobj = stock();
-            commands.forEach((command) => {
-
-                const currentCommand = command.split(" ")[0].toLowerCase();
-                const name = command.split(" ")[1];
-                const count = command.split(" ")[2];
-                const Item = {
-                    name: name,
-                    count: count
-                };
-                if (currentCommand === "add") {
-                    return stovkobj.Add(Item);
-                }
-                if (currentCommand === "updatecount") {
-                    return stovkobj.updateCount(Item);
-                }
-                if (currentCommand === "remove") {
-                    return stovkobj.remove(Item);
-                }
-                if (currentCommand === "listitem") {
-                    console.log("List of the ", Item.name, " :", stovkobj.listItem(Item));
-                }
-                if (currentCommand === "listallitem") {
-                    console.log("List of all Items :", stovkobj.listAll());
-                }
-            })
-        }
-        operate(['Add chair', 'Add sofa 12', 'Add table 17', 'remove table', 'listItem chair', 'updateCount chair 12', 'Add chair', 'listAllItem'])
-    </script>
-    <!-- <script>
-        console.log("Yash I");
-        const InventoryList = () => {
-            const Inventory = [];
-
-            const AddItem = (item) => {
-                console.log(item);
-                // const repeat = Inventory.filter((elem) => elem.name == item.name);
-                // if (repeat == '') {
-                //     Inventory.push(item);
-                // }
-                if (!(Inventory.includes(item.name))) {
-                    Inventory.push(item);
-                }
-
-            }
-            const RemoveItem = (name) => {
-                n = Inventory.findIndex((element) => element == name);
-                if (n > -1) {
-                    Inventory.splice(n, 1);
-                }
-            }
-            const showList = () => {
-                return Inventory;
-            }
-            return {
-                add: AddItem,
-                remove: RemoveItem,
-                list: showList
+                removeItem: removeItem,
+                listItem: inventoryItem,
+                listAllItem: inventoryAllItems
             }
         }
 
         function main(commands) {
-            const InventoryObject = InventoryList();
+            const inventoryObject = inventoryList();
             commands.forEach((command) => {
-                const name = command.split(" ")[1];
-                const count = command.split(" ")[2];
+                const allParameters = command.split(" ");
                 const currentCommand = command.split(" ")[0].toLowerCase();
-                const Item = {
-                    name: name,
-                    count: count
-                };
+                const currentParameter = command.split(" ")[1];
+                // const Item = {
+                //     name: name,
+                //     count: count
+                // };
                 if (currentCommand === "add") {
-                    return InventoryObject.add(Item);
-                } else if (currentCommand === "remove") {
-                    return InventoryObject.remove(Item);
-                } else if (currentCommand === "list") {
-                    console.log(InventoryObject.list());
-                } else {
-                    return "Invalid Comment";
+
+                    return inventoryObject.Add(currentParameter);
+                }
+                if (currentCommand === "updatecount") {
+                    const countParam = command.split(" ")[2];
+                    return inventoryObject.updateCount(currentParameter, countParam);
+                }
+                if (currentCommand === "removeitem") {
+
+                    return inventoryObject.removeItem(currentParameter);
+                }
+                if (currentCommand === "listitem") {
+                    console.log("List of the ",currentParameter, " :", inventoryObject.listItem(currentParameter));
+                }
+                if (currentCommand === "listallitem") {
+                    console.log("List of all Items :", inventoryObject.listAllItem());
                 }
             })
         }
-        main(['Add chair', 'Add sofa 12', 'Add chair', 'Add chair', 'list']);
-    </script> -->
+        main(['Add chair', 'Add table', 'updateCount table 239', 'listItem table','removeItem table', 'listAllItem'])
+    </script>
+
 </body>
+
 </html>
