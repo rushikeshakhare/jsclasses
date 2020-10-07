@@ -15,26 +15,191 @@
                 <thead>
                     <tr>
                         <th>Item Name</th>
-                        <th>Count</th>
+                        <th>Item Count</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            chair
-                        </td>
-                        <td>
-                            234
-                        </td>
-                    </tr>
+                <tbody class="inventory-body" id="inventory-body">
                 </tbody>
+
             </table>
         </div>
         <div class="command">
-
+            <div class="command-container">
+                <input type="text" name="item-name" id="item-name" placeholder="Enter Item Name" value="">
+                <input type="number" name="item-count" id="item-count" placeholder="Enter Item Count" value="">
+                <div class="command-button">
+                    <button type="button" id="btn-add">Add</button>
+                    <button type="button" id="btn-remove">Remove</button>
+                    <button type="button" id="btn-update">Update</button>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        const inventoryList = () => {
+            const inventory = [];
+            const addItem = (name, count) => {
+                if (!(inventory.find((element) => element.name === name))) {
+                    inventory.push({
+                        name: name,
+                        count: parseInt(count)
+                    })
+                    return {
+                        status: true,
+                        message: `Item ${name} added to inventory`
+                    };
+                } else {
+                    return {
+                        status: false,
+                        message: `Item ${name} already Exists.`
+                    };
 
+                }
+            }
+            const updateCount = (name, count) => {
+                const index = inventory.findIndex((element) => element.name === name)
+                if (index > -1) {
+                    inventory[index].count = count;
+                    return {
+                        status: true,
+                        message: `${name} Count Updated `
+                    };
+                } else {
+                    return {
+                        status: false,
+                        message: `Item ${name} is not found to update.`
+                    };
+
+                }
+            }
+            const removeItem = (item) => {
+                const index = inventory.findIndex((element) => element.name === item)
+                if (index > -1) {
+                    inventory.splice(index, 1);
+                    return {
+                        status: true,
+                        message: `Item ${name} Removed`
+                    };
+                } else {
+                    return {
+                        status: false,
+                        message: `Item ${name} is not found.`
+                    };
+
+                }
+            }
+            const inventoryItem = (item) => {
+                const index = inventory.findIndex((element) => element.name === item)
+                if (index > -1) {
+                    return inventory[index];
+                } else {
+                    console.log(`element ${item} not found`)
+                }
+            }
+            const inventoryAllItems = () => {
+                return inventory.length ? inventory : "NO items found.";
+            }
+            return {
+                Add: addItem,
+                updateCount,
+                removeItem: removeItem,
+                listItem: inventoryItem,
+                listAllItem: inventoryAllItems
+            }
+        }
+        const showToast = (message, error) => {
+            const toastElement = document.createElement("div");
+            toastElement.setAttribute("id", "Toast");
+            if (!error) toastElement.classList.add("toast-success");
+            else toastElement.classList.add("toast-error");
+            toastElement.textContent = message;
+            document.body.appendChild(toastElement);
+            setTimeout(() => {
+                document.getElementById("Toast").remove()
+            }, 2000)
+        }
+        const addBtn = document.getElementById("btn-add");
+        const removeBtn = document.getElementById("btn-remove");
+        const updateBtn = document.getElementById("btn-update");
+        const itemName = document.getElementById("item-name");
+        const itemCount = document.getElementById("item-count");
+        const inventoryBody = document.getElementById("inventory-body");
+
+        const inventoryObject = inventoryList();
+        const updateInventory = () => {
+            inventoryBody.innerHTML = '';
+            const InventoryItems = inventoryObject.listAllItem();
+            console.log("yash");
+
+            InventoryItems.forEach((invObj) => {
+                const tableRow = document.createElement("tr");
+                const itemNamedata = document.createElement("td");
+                itemNamedata.textContent = invObj.name;
+                const itemCountdata = document.createElement("td");
+                itemCountdata.textContent = invObj.count;
+                tableRow.appendChild(itemNamedata);
+                tableRow.appendChild(itemCountdata);
+                inventoryBody.appendChild(tableRow);
+            });
+            console.log(InventoryItems)
+
+        }
+        const onAddButtonClick = () => {
+            const itemNameValue = itemName.value;
+            const itemCountValue = itemCount.value;
+            if (!itemNameValue) {
+                showToast("please enter Item Name", true);
+                return;
+            }
+            const addStaus = inventoryObject.Add(itemNameValue, itemCountValue ? itemCountValue : 0);
+            if (addStaus.status) {
+                showToast(addStaus.message, );
+                updateInventory();
+                itemName.value = "";
+                itemCount.value = "";
+            } else {
+                showToast(addStaus.message, true);
+            }
+        }
+        const onRemoveButtonClick = () => {
+            const itemNameValue = itemName.value;
+            if (!itemNameValue) {
+                showToast("please enter Item Name", true);
+                return;
+            }
+            const removeStaus = inventoryObject.removeItem(itemNameValue);
+            if (removeStaus.status) {
+                showToast(removeStaus.message, );
+                updateInventory();
+                itemName.value = "";
+                itemCount.value = "";
+            } else {
+                showToast(removeStaus.message, true);
+            }
+
+        }
+        const onUpdateButtonClick = () => {
+            const itemNameValue = itemName.value;
+            const itemCountValue = itemCount.value;
+            if (!itemNameValue) {
+                showToast("please enter Item Name", true);
+                return;
+            }
+            const updateStatus = inventoryObject.updateCount(itemNameValue, itemCountValue);
+            if (updateStatus.status) {
+                showToast(updateStatus.message, );
+                updateInventory();
+                itemName.value = "";
+                itemCount.value = "";
+            } else {
+                showToast(updateStatus.message, true);
+            }
+
+        }
+        addBtn.onclick = onAddButtonClick;
+        removeBtn.onclick = onRemoveButtonClick;
+        updateBtn.onclick = onUpdateButtonClick;
+    </script>
 </body>
 
 </html>
