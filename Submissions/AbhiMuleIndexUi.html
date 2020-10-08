@@ -221,8 +221,8 @@
         const  updateContent = ()=>{
             const check =   validate();
          if(check){
-             if(itemCount.value === 0){
-                 showToast("Item Count Can not Updated 0",false);
+             if(!itemCount.value){
+                 showToast("Please Enter the Count",false);
                  return ; 
              }
           const status = inventoryObject.updateCount(itemName.value.toLowerCase(),itemCount.value);
