@@ -3,11 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice</title>
+    <title>Suggestion List</title>
+    <style>
+       .search-box{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+            flex-direction: column;
+     }
+     .search-input{
+         padding: 16px;
+         width: 40%;
+         border-radius: 34px;
+         margin-top: 18%;
+         outline: none;
+         font-size: 18px;
+         z-index: 2;
+     }
+     .search-input:hover{
+    box-shadow: 2px 2px 7px grey;
+  }
+     .suggestion{
+         width: 42.3%;
+         margin-top: -24px;
+         border: .5px solid grey;
+         border-top: 0px;
+        border-bottom-left-radius:15px ;
+        border-bottom-right-radius: 15px;
+        height:300px; 
+        box-shadow: 2px 2px 7px grey;
+        overflow: auto;
+        transition-delay: 150ms;
+        font-size: 20px;
+        display: none;
+     }
+     .suggestion ul li{
+padding:10px;
+font-size: 20px;
+}
+     /* .search-input:hover{
+         border-bottom: 0px;
+     } */
+    #suggestion-list{
+        margin-top : 45px;
+        list-style-type: none;
+    }
+    </style>
 </head>
 <body>
+    <div class="search-box">
+        <input type="text" class="search-input" id="search-input">
+        <div class="suggestion" id="suggestions">
+          <ul id="suggestion-list">
+            
+          </ul>
+        </div>
+      </div>
     <script>
-   
+   const questions = [{
+        question:'What is the distance of sun from earth?'
+      },{
+        question:'How much is the age of earth?'
+      },{
+        question:'What kind of forces do pacific ocean have in bermuda triangle?'
+      },{
+        question:'How often social media impacts on democracy?'
+      },{
+        question:'Which is the tallest building on earth?'
+      },{
+        question:'How much do an Javascipt Developer Earn In India?'
+      }];
+      const showResultPane = () => {
+        suggestions.style.display = 'inline';
+        suggestionList.innerHTML = '';
+        searchInput.style.borderBottom = 'none';
+        searchInput.style.borderBottomLeftRadius = '0px';
+        searchInput.style.borderBottomRightRadius = '0px';
+        searchInput.style.boxShadow = '0px -3px 4px grey';
+      }
+      const searchInput = document.getElementById('search-input');
+      const suggestions = document.getElementById('suggestions');
+      const suggestionList =  document.getElementById('suggestion-list');
+      const hideResultPane = () => {
+          suggestions.style.display = 'none';
+          searchInput.style.borderBottom = '.5px solid rgb(165, 165, 165)';
+          searchInput.style.borderBottomLeftRadius = '34px';
+          searchInput.style.borderBottomRightRadius = '34px';
+          searchInput.style.boxShadow = '2px 3px 4px grey';
+      }
+      const setSearchInput = (event)=>{
+          searchInput.value = event.target.textContent;
+     }
+      const showData = (event)=>{
+        const searchValue = event.target.value.toLowerCase();
+      const searchResult  = questions.filter((element)=>element.question.toLowerCase().includes(searchValue));
+       if(searchValue == ""){
+        hideResultPane();
+        console.log("closed");
+       }
+        if(searchResult.length){
+            showResultPane();
+        searchResult.forEach((element)=>{
+           const createList =  document.createElement("li");
+           createList.style.cursor = "pointer";
+          createList.textContent = element.question;
+           createList.onclick = setSearchInput;
+            suggestionList.appendChild(createList);
+        });
+        }else{
+             hideResultPane();
+        }
+     };
+     const  webPageClick = (e)=>{
+         if(searchInput.contains(event.target) || suggestions.contains(event.target)) return;
+        hideResultPane();
+     }
+      searchInput.onkeyup = showData;
+      document.onmousedown = webPageClick;
     </script>
 </body>
 </html>
