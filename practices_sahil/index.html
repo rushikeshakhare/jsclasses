@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{
+        font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <title>Inventory Management</title>
+</head>
+<body>
+    <div class="container">
+        <div class="inventory">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Item Count</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-body">
+              
+                </tbody>
+            </table>
+        </div>
+        <div class="actions">
+            <div class="inputs">
+                <input type="text" placeholder="Item Name" id="item-name">
+                <input type="number" placeholder="Item Count" id="item-count">
+            </div>
+            <div class="action-buttons">
+                <button type="button" id="add-button">Add</button>
+                <button type="button" id="remove-button">Remove</button>
+                <button type="button" id="update-button">Update</button>
+            </div>
+        </div>
+    </div>
+    <script src="intentory_file.js">  </script>
+    <script src="button_function.js"></script>
+</body>
+</html>
