@@ -67,7 +67,7 @@
                 } else {
                     return {
                         status: false,
-                        message: `Item ${name} is not found to update.`
+                        message: `Item ${name} not found to update.`
                     };
 
                 }
@@ -83,7 +83,7 @@
                 } else {
                     return {
                         status: false,
-                        message: `Item ${name} is not found.`
+                        message: `Item ${name} not found.`
                     };
 
                 }
@@ -183,6 +183,10 @@
             const itemCountValue = itemCount.value;
             if (!itemNameValue) {
                 showToast("please enter Item Name", true);
+                return;
+            }
+            if (!itemCountValue) {
+                showToast("please enter Item Count", true);
                 return;
             }
             const updateStatus = inventoryObject.updateCount(itemNameValue, itemCountValue);

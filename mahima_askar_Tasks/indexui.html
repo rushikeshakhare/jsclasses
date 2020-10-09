@@ -3,44 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleui.css">
     <style>
         *{
-        font-family: 'Roboto', sans-serif;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: bold;
         }
     </style>
-    <title>Inventory Management</title>
+    <title>inventory management</title>
 </head>
 <body>
     <div class="container">
-        <div class="inventory">
+       <div class="inventory">
             <table>
                 <thead>
                     <tr>
-                        <th>Item Name</th>
-                        <th>Item Count</th>
+                        <th>item name</th> 
+                        <th>item count</th>
                     </tr>
                 </thead>
-                <tbody id="inventory-body">
-              
+                <tbody  id="inventory-body">
+                    <tr>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="actions">
-            <div class="inputs">
-                <input type="text" placeholder="Item Name" id="item-name">
-                <input type="number" placeholder="Item Count" id="item-count">
+       </div>
+       <div class="actions">
+           
+           <div class="inputs">
+            <input type="text" placeholder="ITEM NAME" id="item-name">
+            <input type="number" placeholder="ITEM COUNT" id="item-count">
+           </div>
+           <div class="action-buttons">
+             <button type="button" id="add-button">Add</button>
+             <button type="button" id="remove-button">Remove</button>
+             <button type="button" id="update-button">Update</button>
             </div>
-            <div class="action-buttons">
-                <button type="button" id="add-button">Add</button>
-                <button type="button" id="remove-button">Remove</button>
-                <button type="button" id="update-button">Update</button>
-            </div>
-        </div>
+       </div>
     </div>
-    <script>  
-    const inventoryList = () => {
+    <div class="toast">
+
+    </div>
+    <script>
+       const inventoryList = () => {
         const inventory = [];
 
         const addItem = (name,count) => {
@@ -48,7 +54,6 @@
                 inventory.push({name,count:parseInt(count)})
                 return {status:true,message:`Item '${name}' Added To Inventory`};
             }
-
             else 
                 return {status:false,message:`Item '${name}' Already Exists`};
         }
@@ -57,7 +62,7 @@
             const itemIndex = inventory.findIndex((element) => element.name === name);
             if(itemIndex > -1){
                 inventory.splice(itemIndex,1);
-                return {status:true,message:`Item '${name} removed'`};
+                return {status:true,message:`Item '${name} removed`};
             }
             else return {status:false,message:`Item '${name}' Not Found`}; 
         }
@@ -68,9 +73,11 @@
 
         const updateCount = (name,count) => {
             const itemIndex = inventory.findIndex((element) => element.name === name);
-            if(itemIndex > -1)
-                 inventory[itemIndex].count = parseInt(count);
-            else console.log(`Item '${name}' Not Found`);
+            if(itemIndex > -1){
+               inventory[itemIndex].count = parseInt(count);
+               return{status:true,message:`item '${name}' has been updated successfully`}
+            }
+            else return{status:false,message:`item '${name}' not found`}
         }
 
         const listItem = (name) => {
@@ -79,7 +86,7 @@
                  return inventory[itemIndex];
             else return `Item '${name}' Not Found`;
         }
-        
+
 
         return {
             add:addItem,
@@ -97,40 +104,24 @@
         const itemName = document.getElementById('item-name');
         const itemCount = document.getElementById('item-count');
         const inventoryBody = document.getElementById('inventory-body');
-        
+
         const updateInventory = () => {
             inventoryBody.innerHTML = '';
             const inventoryItems = inventory.listAllItems();
-     
-            inventoryItems.forEach((inobj) => {
+
+            inventoryItems.forEach((obj) => {
                 const tableRow = document.createElement('tr');
                 const itemNameData = document.createElement('td');
-                itemNameData.textContent = inobj.name;
+                itemNameData.textContent = obj.name;
                 const itemCountData = document.createElement('td');
-                itemCountData.textContent = inobj.count;
+                itemCountData.textContent = obj.count;
                 tableRow.appendChild(itemNameData);
                 tableRow.appendChild(itemCountData);
                 inventoryBody.appendChild(tableRow);
             })
-        }
+        } 
 
-        const onRemoveButtonClick = () => {
-            const itemNameValue = itemName.value;
-            if(!itemNameValue){
-                showToast("Please Enter Item Name",true);
-                return;
-            }
-            const removeStatus = inventory.removeItem(itemNameValue);
-            if(removeStatus.status) {
-            showToast(removeStatus.message);
-            updateInventory();
-            itemName.value = '';
-            itemCount.value = '';
-            }
-           else showToast(removeStatus.message,true)
-        }
-
-        const onAddButtonClick = () => {
+          const onAddButtonClick = () => {
             const itemNameValue = itemName.value;
             const itemCountValue = itemCount.value;
 
@@ -147,7 +138,49 @@
             itemCount.value = '';
             }
            else showToast(addStatus.message,true)
-         
+
+        }
+       
+         const onRemoveButtonClick = () => {
+            const itemNameValue = itemName.value;
+
+            if(!itemNameValue){
+                showToast("Please Enter Item Name",true);
+                return;
+            }
+
+            const removeStatus = inventory.removeItem(itemNameValue);
+
+            if(removeStatus.status) {
+            showToast(removeStatus.message);
+            updateInventory();
+            itemName.value = '';
+            itemCount.value = '';
+            }
+           else showToast(removeStatus.message,true)
+        }
+
+         const onUpdateButtonClick =() =>{
+            const itemNameValue = itemName.value;
+            const itemCountValue = itemCount.value;
+
+            if(!itemNameValue){
+                showToast("Please Enter Item Name",true);
+                return;
+            }
+            if(!itemCountValue){
+                showToast("Please Enter Item Count",true);
+                return;
+            }
+            const updateStatus = inventory.updateCount(itemNameValue, itemCountValue);
+
+            if(updateStatus.status) {
+            showToast(updateStatus.message);
+            updateInventory();
+            itemName.value = '';
+            itemCount.value = '';
+            }
+           else showToast(updateStatus.message,true)
         }
 
         const showToast = (message,error) => {
@@ -161,11 +194,18 @@
             document.body.appendChild(toastElement);
             setTimeout(() => {
                 document.getElementById('toast').remove()
-            },2000)
+            },3000)
         }
+         
+       
 
+        
         addButton.onclick = onAddButtonClick;
         removeButton.onclick = onRemoveButtonClick;
+        updateButton.onclick = onUpdateButtonClick;
+        
+      
+        //main(['add cookie','add chocolate','add shakes','updateCount cookie 50','updateCount chocolate 12','remove shakes','listItem cookie','listAllItems']);
     </script>
 </body>
 </html>
