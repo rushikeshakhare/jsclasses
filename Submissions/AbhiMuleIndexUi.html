@@ -173,7 +173,6 @@
         }
         if(!isNaN(itemName.count)){
             showToast("Item Count Must be Number.",false);
-            console.log("ifcase");
             return false;
         }else{
            return true;
@@ -181,7 +180,6 @@
        };
        const  addContent = ()=>{
          const check =   validate();
-         console.log(check);
          if(check){
          const  status =  inventoryObject.add(itemName.value.toLowerCase(),itemCount.value ? itemCount.value  : 0);
          if(status.status){
