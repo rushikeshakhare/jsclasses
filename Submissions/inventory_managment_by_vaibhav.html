@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="inventory">
+           <h2 style ="text-align: center; color:white">Inventory List</h2> 
+            <table>
+                <thead>
+                    
+                    <tr><th>ITEM NAME</th>
+                        <th>ITEM COUNT</th>
+                    </tr>
+                </thead>
+                <tbody id = "inventory-body" class="inventory-body">
+                
+                </tbody>
+            </table>
+        </div>
+        <div class="action-container">
+            <h2 style ="margin-left: 220px; color:white">Actions</h2>
+            <div class="action-elements">
+           <form action="">
+            <input type="text" name="item-name" id="item-name" placeholder="enter item name">
+            <input type="number" name="item-count" id="item-count" placeholder="enter count" style="margin-left: 20px;">
+         </form>
+            <br>
+        <div class="action-button" style = "margin-top: 20px;">
+            <button type = "button" id ="add-item" style = "background-color:rgb(69, 182, 69);color:white; width: 200px;"onclick= "add_item()">ADD ITEM</button>
+            <button type = "button" id ="update-count" style = "background-color:rgb(51, 51, 226);color:white;margin-left: 20px; width: 200px;"onclick = "update_count()">UPDATE COUNT</button><br>
+            <button type = "button" id ="remove-item" style = "background-color:rgb(219, 64, 64);color:white;margin-left: 110px;margin-top:10px; width: 200px;"onclick= "remove_item()">REMOVE ITEM</button>
+     
+     </div>
+       </div>
+
+        </div> 
+       <b style = "font-size: 30px;font-weight: bold;"> <center>Messages</center></b> 
+       
+
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>
