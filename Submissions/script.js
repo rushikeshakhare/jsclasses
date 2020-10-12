@@ -55,7 +55,10 @@ return {
 function add_item(){
    const itemname = document.getElementById("item-name").value;
    let itemcount = document.getElementById("item-count").value;
- 
+
+   document.getElementById("item-name").value = "";
+   document.getElementById("item-count").value = "";
+
 if(itemname == ""){
    showtoast("please enter item name",true);
    return;
@@ -107,6 +110,8 @@ inventoryBody.appendChild(tableRow);
 function remove_item(item){
 const itemname = document.getElementById("item-name").value;
    let itemcount = document.getElementById("item-count").value;
+   document.getElementById("item-name").value = "";
+   document.getElementById("item-count").value = "";
    if(itemname == ""){
    showtoast("please enter item name",true);
    return;
@@ -131,6 +136,8 @@ function update_count(){
    inventoryobj = inventoryList();
    const itemname = document.getElementById("item-name").value;
    let itemcount = document.getElementById("item-count").value;
+   document.getElementById("item-name").value = "";
+   document.getElementById("item-count").value = "";
    if(itemname == ""){
    showtoast("please enter item name",true);
    return;
