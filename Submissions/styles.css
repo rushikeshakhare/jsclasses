@@ -1,0 +1,104 @@
+*{
+    margin :0;
+    padding: 0px;
+}
+.container{
+width:100%;
+height:100%;
+}
+.inventory{
+    float:left;
+    width:20%;
+    height:100vh;
+    background-color: rgb(26, 27, 27);
+ 
+}
+.inventory table thead th,td{
+
+    margin: 120px;
+  text-align: center;
+  color:white;
+  padding-left:20px;
+  padding-top:10px;
+}
+.inventory table{
+    margin:30px;
+    text-align: center;
+}
+.action-container{
+    float:left;
+    width:50%;
+background-color: rgba(23, 81, 110, 0.836);
+    height:100vh;
+}
+.toast-error{
+    background-color: red;
+}
+.toast-success{
+    background-color: green;
+}
+.toast{
+    text-align: center;
+    margin-left: 90px;
+    float:left;
+    width:20%;
+
+color: white;
+font-size: 20px;
+margin-top:50px;
+border-radius: 8px;
+border:2px solid gray;
+animation: toast 1s none;
+}
+@keyframes toast {
+    0%{
+     
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100%{
+        
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.inventory-body tr{
+animation: toast1 1s;
+animation-iteration-count: initial;
+}
+@keyframes toast1 {
+    0%{
+     
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100%{
+        
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.action-container button{
+   
+    font-size: 15px;
+    padding:10px;
+    outline: 0;
+    border:0;
+    border-radius:9px;
+    cursor:pointer;
+    display:inline;
+}
+
+.action-container input{
+    font-size: 15px;
+    padding:10px;
+    border-radius: 8px;
+    outline:0;
+    border: 2px solid gray;
+  
+   
+}
+
+ .action-elements{
+margin:70px;
+}
