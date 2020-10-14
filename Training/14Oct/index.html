@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{
+        font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="weather-input">
+        <input type="text" class="city-input" placeholder="Enter City.." id="city-input">
+        <button type="button" id="proceed-button" class="proceed-button">Search</button>
+    </div>
+ 
+    <div class="weather-data">
+        <div class="card" id="weather-card">
+            
+        </div>
+    </div>
+    <script>
+        const cityInput = document.getElementById('city-input');
+        const proceedButton = document.getElementById('proceed-button');
+        const weatherCard = document.getElementById('weather-card');
+        const apiKey = '9e1903e5d36589a1fc3768ca08960402';
+
+        const showToast = (message,error) => {
+            const toastElement = document.createElement('div');
+            toastElement.setAttribute('id','toast');
+            toastElement.classList.add('toast');
+            if(error)
+                toastElement.classList.add('toast-error');
+            else toastElement.classList.add('toast-success');
+            toastElement.textContent = message;
+            document.body.appendChild(toastElement);
+            setTimeout(() => {
+                document.getElementById('toast').remove()
+            },2000)
+        }
+
+        const onWeatherDataSuccess = (data) => {
+            weatherCard.innerHTML = ``;
+            if(data.cod === 200)
+                weatherCard.innerHTML = `<h1 class="city-name">${data.name}</h1>
+                <h3 class="condition">${data.weather[0].main}</h3>
+                <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="" class="condition-icon">
+                <h3 class="temperature">${Math.round(data.main.temp - 273.15,2)} °C
+                </h3>`;
+            else showToast(data.message,true);
+        }
+
+        const weatherService = (cityName) => {
+            fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+            .then((data) => data.json())
+            .then(onWeatherDataSuccess)
+        }
+
+        const onProceedButtonClick = () => {
+            const cityInputValue = cityInput.value;
+            if(!cityInputValue){
+                return showToast('Please enter City Name',true)
+            }
+            weatherCard.innerHTML = `<div class="loading"></div>`;
+            weatherService(cityInputValue)
+        }
+
+        proceedButton.onclick = onProceedButtonClick
+    </script>
+</body>
+</html>
