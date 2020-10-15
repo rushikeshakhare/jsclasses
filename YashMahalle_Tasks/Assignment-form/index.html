@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="form.css">
+    <title>Form</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="toast-error" id="Toast">
+            <ul id="message-list">
+
+            </ul>
+        </div>
+        <div class="dataSet" id="data-pane">
+
+        </div>
+        <form class="form" id="form">
+            <div class="form-header">
+                Check Your Info
+            </div>
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="Name">Enter Name :</label><br>
+                        <input type="text" class="name" id="name" placeholder="FirstName LastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="Contact">Contact No :</label><br>
+                        <input type="number" onclick="this.type='number'" class="Contact" id="Contact" placeholder=" Contact No">
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group">
+                        <label for="Adhar">Adhar Card No :</label><br>
+                        <input type="text" class="Adhar" onclick="this.type='number'" id="Adhar" placeholder="Adhar Card Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Pan Card No :</label><br>
+                        <input type="text" class="pan" id="pan" placeholder="Pan Card No.">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group form-textarea">
+                        <label for="Name">Address :</label><br>
+                        <textarea type="text" class="Address" rows="5" id="Address" placeholder="Permanent Address .."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-footer">
+                <button type="button" id="submit-button"> Submit </button>
+            </div>
+        </form>
+    </div>
+    <script src="form.js"></script>
+</body>
+
+</html>

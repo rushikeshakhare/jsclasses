@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+
+<body>
+    <h1 style="text-align: center; width: 100%;">Yash</h1>
+
+    <script>
+        const onSuccess = (response) => {
+            console.log(response)
+            return response.map((element) => ({...element,
+                Boss: "Yash"
+            }));
+
+        }
+        const onError = (response) => {
+            console.log(response);
+        }
+        const onModify = (response) => {
+            console.log(response)
+        }
+        fetch('https://jsonplaceholder.typicode.com/todos/').then(data => data.json()).then(onSuccess).then(onModify).catch(onError);
+    </script>
+</body>
+
+</html>

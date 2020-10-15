@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/search.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="search-box">
+        <input type="text" class="search-input .with-suggestion" id="search-input">
+        <div class="suggestions " id="suggestion-box">
+            <!-- suggestion-show -->
+            <ul class="suggestion-list" id="suggestion-list">
+
+            </ul>
+        </div>
+    </div>
+    <script>
+        const questions = [{
+            question: 'What is the distance of sun from earth?'
+        }, {
+            question: 'How much is the age of earth?'
+        }, {
+            question: 'What kind of forces do pacific ocean have in bermuda triangle?'
+        }, {
+            question: 'How often social media impacts on democracy?'
+        }, {
+            question: 'Which is the tallest building on earth?'
+        }, {
+            question: 'How much do an Javascipt Developer Earn In India?'
+        }];
+
+        const searchInput = document.getElementById("search-input");
+        const suggestionBox = document.getElementById("suggestion-box");
+        const suggestionList = document.getElementById("suggestion-list");
+        suggestionBox.style.display = "none";
+
+        const showFilteredSuggestions = (filterResult) => {
+            suggestionList.innerHTML = "";
+            if (filterResult.length) {
+                showSuggestionPane();
+                filterResult.forEach(element => {
+
+                    const newResult = document.createElement("li");
+                    newResult.textContent = element.question;
+                    newResult.onclick = onResultOptionClick;
+                    suggestionList.appendChild(newResult);
+                });
+            } else hideshowSuggestionPane();
+        }
+        const onResultOptionClick = (event) => {
+            const setText = event.target.textContent;
+            searchInput.value = setText;
+            hideSuggestionPane();
+        }
+        const showSuggestionPane = () => {
+            suggestionBox.style.display = "";
+            searchInput.style.borderBottom = "0px solid white";
+            searchInput.style.borderBottomLeftRadius = '0px';
+            searchInput.style.borderBottomRightRadius = '0px';
+        }
+        const hideSuggestionPane = () => {
+            suggestionBox.style.display = "none";
+            searchInput.style.borderBottom = "0.5px solid gray";
+            searchInput.style.borderBottomLeftRadius = '30px';
+            searchInput.style.borderBottomRightRadius = '30px';
+        }
+        const showSuggestion = (event) => {
+            const searchText = event.target.value;
+            const filterResult = questions.filter((Element) => Element.question.toLowerCase().includes(searchText.toLowerCase()));
+            showFilteredSuggestions(filterResult);
+        }
+        const onWebPageClick = (event) => {
+            if (searchInput.contains(event.target) || suggestionBox.contains(event.target)) return;
+            hideSuggestionPane();
+        }
+        document.onmousedown = onWebPageClick;
+        searchInput.onkeyup = showSuggestion;
+    </script>
+</body>
+
+</html>
