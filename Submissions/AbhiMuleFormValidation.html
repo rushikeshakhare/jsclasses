@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validations</title>
+    <style>
+        *{
+            color:white;
+            background-color: black;
+        }
+        .container{
+            width: 100%;
+            height: auto;
+        }
+        .col-1{
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            
+        }
+        fieldset{
+            padding: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 2px 2px 2px white;
+          transition: 500ms;
+        }
+        fieldset:hover{
+            box-shadow: 2px 2px 10px purple;
+        }
+        legend{
+            font-size: 35px;
+            font-weight : bold;
+            text-shadow: 2px 2px 0.5px #ffffff;
+        }
+        input{
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid white;
+            outline: none;
+            width: 80%;
+            font-size: 14px;
+            margin-top:10px;
+            transition: 500ms;
+        }
+        label{
+            font-size: 20px;
+            margin: 15px;
+            text-align: center;
+        }
+        textarea{
+            margin-top: 10px;
+            border-radius: 8px;
+            outline: none;
+            border: 1px solid white;
+            padding: 5px;
+            font-size: 16px;
+            transition: 500ms;
+        }
+        input:hover{
+            transform: scale(1.1);
+            box-shadow: 2px 2px 3px purple;
+        }
+        textarea:hover{
+            transform: scale(1.1);
+            box-shadow: 2px 2px 3px purple;   
+        }
+        .toast{
+            width: auto;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 2px 2px 5px grey;
+            position: absolute;
+            top: 25px;
+            right: 0;
+            margin-right: 20px;
+            transition: 350ms;
+            color:white;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 20px;
+        }
+        .toast-error {
+            background-color: #e74a3b;
+        }
+        .toast-warning{
+            background-color: #f6c23e;
+        }
+
+        #submitButton,#back{
+            padding: 14px;
+            border-radius: 5px;
+            text-align: center;
+            outline: none;
+            font-size: 15px;
+            font-weight:bolder;
+            border: 1px solid rgb(129, 106, 106);
+            transition: 500ms;
+        }
+        #submitButton:active{
+            box-shadow: 2px 2px 8px purple;
+            transform: scale(1.1);
+            border: 3px solid rgb(129, 106, 106);
+        }
+        #back:active{
+            box-shadow: 2px 2px 8px purple;
+            transform: scale(1.1);
+            border: 3px solid rgb(129, 106, 106);
+        }
+        .show-data{
+            margin: 0 auto;
+            text-align: center;
+            display: none;
+        }
+        table{
+            border-collapse: collapse;
+            transition: 500ms;
+            margin-top: 30px;
+        }
+        th,td{
+            padding: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="col-1">
+            <fieldset>
+                <legend align="center">Registeration Form</legend>
+                <form id="form">
+                    <div class="form-group">
+                        <label for="name">Name  </label>
+                        <input type="text" name="name" id="name" placeholder="Enter Your Name"> 
+                    </div> <br>
+                    <div class="form-group">
+                        <label for="mobile_number">Mobile No  </label>
+                        <input type="number" name="mobile_number" id="mobile_number" placeholder="Enter Your Mobile No" validate="validate">
+                    </div> <br>
+                    <div class="form-group">
+                        <label for="aadhar_number">Aadhar No </label>
+                        <input type="number" name="aadhar_number" id="aadhar_number" placeholder="Enter Your Aadhar No"> 
+                    </div> <br>
+                    <div class="form-group">
+                        <label for="pan_number">Pan No  </label>
+                        <input type="text" name="pan_number" id="pan_number" placeholder="Enter Your Pan No">
+                    </div> <br>
+                    <div class="form-group">
+                        <label for="address">Adress</label> <br>
+                        <textarea name="address" id="address" cols="30" rows="7" placeholder="Enter Your Address"></textarea>
+                    </div> 
+                    <br>
+                    <div class="form-group">
+                       <center><button type="button" id="submitButton"> Submit </button></center> 
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+    <div class="show-data" id="show">
+        <table align="center" border="3px solid white" width="70%">
+          <thead>
+              <tr><th> Name  </th> <th>Mobile No.</th> <th>Aadhar No.</th> <th>Pan No.</th> <th>Address</th></tr>
+          </thead>
+          <tbody id="showData">
+
+        </tbody>
+        </table>
+        <br> <br><br>
+      <center> <button type="button" id="back">Fill Another Response</button></center>
+    </div>
+</body>
+<script>
+    const UserData = ()=>{
+        const Data = [];
+        const InsertData = (userData)=>{
+            Data.push(userData);
+            console.log(Data);
+        }
+        const ShowData = ()=>{
+           return Data;
+        }
+        return {
+            insert : InsertData,
+            show : ShowData
+        };
+    };
+    const nameId = document.getElementById("name");
+    const mobileId = document.getElementById("mobile_number");
+    const adharId = document.getElementById("aadhar_number");
+    const panId = document.getElementById("pan_number");
+    const addressId = document.getElementById("address");
+    const submitButton = document.getElementById("submitButton");
+    const containerId = document.getElementById("container");
+    const tbody = document.getElementById("showData");
+    const show = document.getElementById("show");
+    const BackButtonId = document.getElementById("back");
+    const Data = UserData();
+    let Name;
+    let Mobile;
+    let Aadhar;
+    let Pan;
+    let Address;
+    const showToast = (message,error)=>{
+        const toastElement = document.createElement("div");
+        toastElement.setAttribute("id","toast");
+        toastElement.classList.add('toast');
+        if(error){
+            toastElement.classList.add('toast-success');
+        }else{
+            toastElement.classList.add('toast-error');
+        }
+        toastElement.textContent = message;
+        container.appendChild(toastElement);
+        setTimeout(()=>{
+            document.getElementById('toast').remove()
+        },2000)
+       }
+    const getData = ()=>{
+        Name =  nameId.value
+        Mobile = mobileId.value;
+         Aadhar = adharId.value;
+         Pan = panId.value;
+         Address = addressId.value;
+    }
+    const Validate = ()=>{
+        const len = Name.split(' ').length;
+        const regpan  = /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/;
+        if(!Name || !Mobile || !Aadhar || !Pan || !Address){
+            showToast("Please Enter All Fields",false);
+            return false;
+       }else if(len != 2){
+            showToast("Please Enter FirstName And LastName Only",false);
+            return false;
+        }else if(Mobile.length != 10){
+            showToast("Mobile Number Should be 10 digits Only",false);
+            return false;
+        }else if(Aadhar.length != 12){
+            showToast("Aadhar Number Should be of 12 digits Only",false);
+            return false;
+        }else if(!regpan.test(Pan)){
+            showToast("Please Enter Valid Pan Card ID",false);
+            return false;
+        }else{
+          return true; 
+        }
+    }
+    const onButtonClick = ()=>{
+        getData();
+      const check =   Validate();
+      if(check){
+        const userInfo = {name:Name,mobile:Mobile,adhar:Aadhar,pan:Pan,address:Address};
+        Data.insert(userInfo);
+        ClearContent();
+        showData();
+
+      }
+        
+    };
+    const showData = ()=>{
+        containerId.style.display = "none";
+          show.style.display = "inline";
+           tbody.innerHTML = '';
+         const data = Data.show();
+        data.forEach(element => {
+           const tr =  document.createElement('tr');
+          tr.innerHTML = `<td> ${element.name} </td> <td>${element.mobile}</td>  <td>${element.adhar}</td>  <td>${element.pan}</td> <td>${element.address}</td>`;
+          tbody.appendChild(tr);
+        });
+       };
+    const ClearContent = ()=>{
+        nameId.value = "";
+         mobileId.value = "";
+         adharId.value  = ""
+         panId.value = ""
+          addressId.value = ""
+    };
+    const onBackButtonClick = ()=>{
+        containerId.style.display = "";
+          show.style.display = "none";   
+    }
+    submitButton.onclick = onButtonClick;
+    BackButtonId.onclick = onBackButtonClick;
+</script>
+</html>
