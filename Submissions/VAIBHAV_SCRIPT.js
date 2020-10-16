@@ -335,9 +335,9 @@ document.getElementById('pancard').style.backgroundPosition = "right";
 document.getElementById('pancard').style.backgroundRepeat = "no-repeat";  
 document.getElementById('pancard').style.boxShadow ="";
 }
-else if(pancard.length != 12){
+else if(pancard.length != 10){
 document.getElementById('panErr').innerHTML =
- "<span style= 'background-color:red;padding:2px 15px;border-radius:8px;border:2px solid rgb(184, 180, 180);position:relative;top:7px;'>Please Enter 12 Numbers</span>";
+ "<span style= 'background-color:red;padding:2px 15px;border-radius:8px;border:2px solid rgb(184, 180, 180);position:relative;top:7px;'>Please Enter 10 Numbers</span>";
  document.getElementById('pancard').style.border = "2px solid red";
  document.getElementById('pancard').style.backgroundImage = "url(alert.png)";
 document.getElementById('pancard').style.backgroundSize = "25px 25px";
