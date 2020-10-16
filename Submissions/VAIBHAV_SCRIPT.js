@@ -376,11 +376,15 @@ function showTable(userName,aadhar,pancard,mobile,address) {
    document.getElementById('showPan').innerHTML = pancard;
    document.getElementById('showAadhar').innerHTML = aadhar;
    document.getElementById('showAddress').innerHTML = address;
-   document.getElementById('userName').value = "";
-   document.getElementById('aadhar').value = "";
-   document.getElementById('pancard').value = "";
-   document.getElementById('mobile').value = "";
-   document.getElementById('address').value = "";
+   setTimeout(() => {
+    document.getElementById('userName').value = "";
+    document.getElementById('aadhar').value = "";
+    document.getElementById('pancard').value = "";
+    document.getElementById('mobile').value = "";
+    document.getElementById('address').value = "";
+
+   },1000);
+  
 
    document.getElementById('userName').style.border = "2px solid rgb(184, 180, 180)";
 document.getElementById('userName').style.backgroundImage = "";
