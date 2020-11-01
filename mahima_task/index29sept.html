@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         const inventory = () => {
+            const List = [];
+
+            const addItem = (item) => {
+                if (item.count == undefined) {
+                    item.count = 1;
+                }
+                const repeat = List.filter((element) => element.name === item.name)
+                if (repeat == '') {
+                    List.push(item)
+                } else {
+                    List.map((element) => {
+                        if (element.name === item.name) {
+                            element.count++;
+                        }
+                    })
+                }
+            }
+            const updateCount = (item) => {
+                List.forEach((element) => {
+                    if (item.name === element.name) {
+                        const c = typeof element.count;
+                        element.count = element.count + parseInt(item.count);
+                    }
+                })
+            }
+            const removeItem = (item) => {
+                const index = List.findIndex((element) => element.name === item.name)
+                if (index > -1) {
+                    List.splice(index, 1);
+                }
+                 
+            }
+            const listItem = (item) => {
+                return List.filter((element) => element.name === item.name)
+            }
+            const listAllItems = () => {
+                return List;
+            }
+            return {
+                Add: addItem,
+                updateCount,
+                remove: removeItem,
+                listItem,
+                listAll: listAllItems
+            }
+        }
+
+        function operate(commands) {
+            const stovkobj = inventory();
+            commands.forEach((command) => {
+                const name = command.split(" ")[1];
+                const count = command.split(" ")[2];
+                const currentCommand = command.split(" ")[0].toLowerCase();
+                const Item = {
+                    name: name,
+                    count: count
+                };
+                if (currentCommand === "add") {
+                    return stovkobj.Add(Item);
+                }
+                if (currentCommand === "updatecount") {
+                    return stovkobj.updateCount(Item);
+                }
+                if (currentCommand === "remove") {
+                    return stovkobj.remove(Item);
+                }
+                if (currentCommand === "listitem") {
+                    console.log("List of the ",Item.name," :",stovkobj.listItem(Item));
+                }
+                if (currentCommand === "listallitem") {
+                    console.log("List of all Items :", stovkobj.listAll());
+                }
+            })
+
+        }
+        operate(['Add chair', 'Add sofa ', 'Add table 17', 'remove table', 'listItem chair', 'updateCount chair 12', 'Add chair', 'listAllItem'])
+    </script>
+</body>
+</html>

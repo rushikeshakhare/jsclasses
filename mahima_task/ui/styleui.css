@@ -1,0 +1,105 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+.container
+{
+    display:grid;
+    grid-template-columns: 20% 80%;
+}
+.container .inventory
+{
+   border-right: 2px solid tan;
+   width: 100%;
+   height:100vh;
+   position: relative;
+   text-align: center;
+   background-color:chartreuse;
+}
+.inventory table
+{
+    margin: auto;
+    margin-top: 40px;
+}
+.inventory table th
+{
+    padding: 10px;
+    font-size: 20px;
+}
+.inventory table tr{
+    animation-name: toast;
+    animation-duration: 200ms;
+    animation-iteration-count: initial;
+}
+.inventory table th,td
+{
+    padding: 10px;
+    text-align: center;
+}
+.container .actions
+{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.actions .inputs
+{
+    margin-bottom: 20px;
+ }
+.inputs input
+{
+        padding:7px;
+        border-radius: 5px;
+        border:.5px solid grey;
+        text-align: center;
+    }
+.actions button
+{
+    padding:9px;
+    font-size: 12px;
+    border:none;
+    background-color:lightblue;
+    color:black;
+    border-radius: 3px;
+    width: 90px;
+    cursor: pointer;
+    transition: 150ms;
+    outline:none;
+    user-select: none;
+}
+button:active
+{
+    background-color:lightseagreen;
+}
+.toast
+{
+    position: fixed;
+    padding:10px;
+    color:white;
+    right:10px;
+    top:10px;
+    text-align: center;
+    animation-name: toast;
+    animation-duration: 150ms;
+    animation-iteration-count: initial;
+}
+
+.toast-error
+{
+  background-color: rgb(250, 57, 57);
+}
+
+.toast-success
+{
+      background-color: #43a047;
+}
+@keyframes toast{
+    0%{
+        opacity: 0;
+        transform:translateY(30px);
+    }
+    100%{
+        opacity: 1;
+        transform:translateY(0px);
+    }
+} 
