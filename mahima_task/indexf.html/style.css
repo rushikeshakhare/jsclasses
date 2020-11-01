@@ -1,0 +1,180 @@
+*
+{
+    margin: 0;
+    padding:0;
+}
+.box
+ {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+.box form
+{
+    width:60%;
+    box-shadow: 1px 1px 1px beige;
+    margin:auto;
+    
+}
+.box form .formheader
+{
+    text-align: center;
+    font-family:algerian;
+    font-size: 30px;
+    height:8vh;
+    background-color: lightgoldenrodyellow;
+    color:darkslategray;
+    width:100%;
+    padding:2px;
+    line-height: 8vh;
+}
+.box form .formbody
+{
+    padding: 5%;
+}
+.box form label
+{
+    font-size: 22px;
+    padding:10%;
+    color: black;
+    text-align:start;
+    font-weight: bold;
+}
+.box form input {
+    padding: 5px;
+    padding-left: 12px !important;
+    width: 100%;
+    font-size: 15px;
+    color: rgba(19, 125, 151, 0.979);
+    border: 0.5px solid grey;
+    border-radius: 20px;
+    outline: none;
+}
+.box form textarea {
+    padding: 5px;
+    padding-left: 12px !important;
+    width: 100%;
+    font-size: 15px;
+    color: rgba(19, 119, 177, 0.945);
+    border: 0.5px solid grey;
+    border-radius: 25px;
+    outline: none;
+}
+.box form .name input{
+    margin: 3px;
+}
+.box form .form-footer {
+    height: 8vh;
+    border-top: 1px solid black;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    line-height: 8vh;
+    font-size: 24px;
+    margin: 0;
+}
+textarea:focus,
+input:focus 
+{
+    transform: scale(1.03);
+    transition: 160ms;
+}
+.box form .form-footer button 
+{
+    padding: 0.5rem;
+    width: 25%;
+    font-size: 20px;
+    font-weight: bold;
+    color:darkblue;
+    border: 2px solid #696969;
+    background: transparent;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
+.box form .form-footer button:active 
+{
+    transform: scale(0.96);
+    transition: 160ms;
+}
+.box form .form-footer button:hover {
+    background-color: #696969;
+    transition: 200ms;
+    color: white;
+}
+#Toast {
+    box-shadow: -1px 2px 10px red;
+    position: fixed;
+    top: 5%;
+    padding: 8px;
+    padding-left: 15px !important;
+    min-width: 20vw;
+    color: white;
+    border-radius: 5px;
+    right: 40%;
+    min-height: 10vh;
+    transition: 500ms;
+    animation-name: toast;
+    animation-duration: 150ms;
+    animation-iteration-count: initial;
+}
+
+#Toast ul {
+    padding: 18px;
+}
+
+#Toast ul li {
+    padding: 18px;
+    font-size: 18px;
+    list-style:none ;
+}
+
+@keyframes toast {
+    0% {
+        transform: translateY(30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.dataset {
+    box-shadow: -1px -2px 8px rgb(42, 151, 240), 1px 2px 8px black;
+    padding: 18px;
+    z-index: 100;
+    transform: scale(0);
+    position: absolute;
+    top: 20%;
+}
+
+.dataset table {
+    width: 100%;
+}
+
+.dataset table th {
+    font-size: 24px;
+}
+
+.dataset table td {
+    font-size: 22px;
+}
+
+.dataset table tr:nth-child(odd) {
+    transition: 250ms;
+    background: rgba(2, 2, 2, 0.1);
+}
+
+.dataset table tr:hover {
+    transform: scale(1.02);
+    transition: 150ms;
+}
+
+.dataset table th,
+td {
+    font-family:Arial, Helvetica, sans-serif;
+    font-family: 'PT Sans', sans-serif;
+    text-align: start;
+    padding: 12px;
+}
