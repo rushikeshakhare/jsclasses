@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoComplete</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="search-box">
+      <input type="text" class="search-input" id="search-input">
+      <div class="suggestion" id="suggestions">
+        <ul id="suggestion-list">
+      
+        </ul>
+      </div>
+    </div>
+    <script>
+      const questions = [{
+        question:'What is the distance of sun from earth?'
+      },{
+        question:'How much is the age of earth?'
+      },{
+        question:'What kind of forces do pacific ocean have in bermuda triangle?'
+      },{
+        question:'How often social media impacts on democracy?'
+      },{
+        question:'Which is the tallest building on earth?'
+      },{
+        question:'How much do an Javascipt Developer Earn In India?'
+      }];
+      const searchInput =document.getElementById('search-input');
+      const suggestions =document.getElementById('suggestions');
+      const suggestionList = document.getElementById('suggestion-list');
+      suggestions.style.display = 'none';
+
+      const onResultOptionClick = (event) => {
+        const textToSet = event.target.textContent;
+        searchInput.value = textToSet;
+      }
+
+      const showResultPane = () => {
+        suggestions.style.display = '';
+        suggestionList.innerHTML = '';
+        searchInput.style.borderBottom = 'none';
+        searchInput.style.borderBottomLeftRadius = '0px';
+        searchInput.style.borderBottomRightRadius = '0px';
+        searchInput.style.boxShadow = '0px -3px 4px grey';
+      }
+
+      const hideResultPane = () => {
+          suggestions.style.display = 'none';
+          searchInput.style.borderBottom = '.5px solid rgb(165, 165, 165)';
+          searchInput.style.borderBottomLeftRadius = '34px';
+          searchInput.style.borderBottomRightRadius = '34px';
+          searchInput.style.boxShadow = '2px 3px 4px grey';
+      }
+
+      const showSearchResults = (filteredResults) => {
+        if(filteredResults.length){
+          showResultPane();
+          filteredResults.forEach((result) => {
+              const newResult = document.createElement('li');
+              newResult.style.cursor = 'pointer';
+              newResult.textContent = result.question;
+              newResult.onclick = onResultOptionClick;
+              suggestionList.appendChild(newResult);
+            })
+        }else hideResultPane();    
+      }
+
+      const onInputChange = (event) => {
+       const searchValue = event.target.value;
+       const filteredResults = questions.filter((searchElement) => searchElement.question.toLowerCase().includes(searchValue.toLowerCase()));
+       showSearchResults(filteredResults);
+      }
+
+      const onWebpageClick = (event) => {
+        if(searchInput.contains(event.target) || suggestions.contains(event.target)) return;
+        hideResultPane();
+      }
+
+      searchInput.onkeyup = onInputChange,
+      document.onmousedown = onWebpageClick;
+    </script>
+</body>
+</html>
