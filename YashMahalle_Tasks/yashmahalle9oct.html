@@ -80,6 +80,18 @@
         document.onmousedown = onWebPageClick;
         searchInput.onkeyup = showSuggestion;
     </script>
+    <script>
+        let count = 0;
+
+        function foo() {
+            return count++;
+        }
+
+        function bar() {
+            console.log(foo());
+        }
+        bar();
+    </script>
 </body>
 
 </html>

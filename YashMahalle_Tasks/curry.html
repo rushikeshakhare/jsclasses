@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log("yash");
+
+        // function givesum() {
+        //     return function sum(a, b) {
+        //         return a + b;
+        //     }
+        // }
+        // const sumFn = givesum();
+
+        // console.log(sumFn(1, 2))
+        //  ================       ========================================
+        // const obj = {
+        //     a: 2
+        // };
+
+        // function testFn() {
+        //     console.log(this);
+        // }
+
+        // function modified(inputFn, object) {
+        //     return inputFn.call(object);
+        // }
+        // modified(testFn, obj);
+        // =============================================================
+        function calculateSum(a, b, c) {
+            return a + b + c;
+        }
+
+        function curry(inputFn) {
+            return function curried(...args) {
+
+                if (args.length === inputFn.length) {
+                    return inputFn.call(this, ...args);
+                } else {
+                    return (...args2) => curried.call(this, ...args.concat(1));
+                }
+            }
+        }
+        const sum = curry(calculateSum);
+        // console.log(typeof(sum1));
+        console.log(sum(1)(2)(3));
+        // console.log(sum(1)(2)(3));
+    </script>
+</body>
+
+</html>

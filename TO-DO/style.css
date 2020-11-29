@@ -1,0 +1,125 @@
+body {
+    font-family: sans-serif;
+    background: #616161;
+}
+
+.container h1 {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.container input {
+    width: 40%;
+    background: transparent;
+    margin-left: 30px;
+}
+
+.container button {
+    width: 100px;
+    background: #eeeeee;
+    cursor: not-allowed;
+    border: 0.5px solid rgba(238, 220, 220, 0.897);
+}
+
+.container button:focus {
+    border: 1.5px solid rgba(245, 242, 242, 0.897);
+}
+
+.container button:active {
+    transition: 180ms;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.container input,
+button,
+.yes,
+.no {
+    padding: 11px;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-size: 16px;
+    outline: none;
+}
+
+.yes,
+.no {
+    cursor: pointer;
+}
+
+#task-list-box {
+    color: white;
+    margin: 4em;
+    width: 50%;
+}
+
+#task-list-box #task {
+    border: 1px solid whitesmoke;
+    padding: 12px;
+    margin: 12px !important;
+    border-radius: 32px;
+    width: 80%;
+    transition: 500ms;
+    animation-name: toast;
+    animation-duration: 150ms;
+    animation-iteration-count: initial;
+}
+
+@keyframes toast {
+    0% {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#task #check {
+    transform: scale(1.5);
+    outline: none;
+    border: 1px solid whitesmoke;
+    margin-right: 30px;
+}
+
+#delete {
+    position: relative;
+    padding: 0px 20px 0px 12px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+#delete:active {
+    color: #df3737;
+}
+
+#text-content {
+    text-decoration: none;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.none {
+    text-decoration: none;
+}
+
+#warn {
+    position: absolute;
+    top: 20%;
+    right: 40%;
+    display: flex;
+    z-index: 111;
+    background-color: #eeeeee;
+    height: 30vh;
+    width: 20vw;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    /* transform: translate(190%, 70%); */
+    border: 1px solid white;
+}

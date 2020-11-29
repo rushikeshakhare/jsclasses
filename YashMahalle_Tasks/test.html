@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    
+    button {
+        z-index: 111;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        color: white;
+        background-color: transparent;
+        padding: 8px;
+        border: 2px solid rgb(230, 241, 225);
+        font-size: 24px;
+        border-radius: 10px;
+        cursor: pointer;
+        outline: none;
+    }
+    
+    button:active {
+        background-color: wheat;
+        transition: 200ms;
+    }
+    
+    .door {
+        width: 100vw;
+        height: 100vh;
+        background: #606c88;
+        /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #3f4c6b, #606c88);
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        transition: 300ms;
+    }
+    
+    .activebtn {
+        border: 2px solid brown;
+        color: brown;
+    }
+</style>
+
+<body>
+    <button id="Clickopen">Click To open </button>
+    <button id="clickClose">Click To close </button>
+    <div class="door" id="door">
+
+    </div>
+    <script>
+        let clickOpen = document.getElementById("Clickopen");
+        let clickClose = document.getElementById("clickClose");
+        let door = document.getElementById("door");
+        clickClose.style.display = "none";
+        const opendoor = () => {
+            door.style.transition = "400ms";
+            door.style.height = "0";
+            clickOpen.style.display = "none";
+            clickClose.style.display = "block";
+            setTimeout(function() {
+                clickClose.classList.add("activebtn");
+            }, 410);
+        }
+        const closedoor = () => {
+            door.style.transition = "400ms";
+            door.style.height = "100vh";
+            clickClose.style.display = "none";
+            clickOpen.style.display = "block";
+            clickClose.classList.remove("activebtn");
+
+        }
+        clickOpen.onclick = opendoor;
+        clickClose.onclick = closedoor;
+    </script>
+    <script>
+        console.log("Yash");
+
+        function calculateSum() {
+            return function sum(a, b, c) {
+                return a + b + c;
+            }
+        }
+        const result = calculateSum();
+        console.log(result(1, 2, 3));
+    </script>
+</body>
+
+</html>
