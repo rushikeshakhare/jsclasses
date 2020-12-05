@@ -19,25 +19,24 @@ const activateButton = () => {
         disableBtn();
     }
 }
-const Complete = (check) => {
-    if (check.checked == true) {
-        var parent = check.parentNode;
-        var Span = parent.getElementsByClassName("span");
-
-        // Span.classList.add("line-through");
-        // Span.style.textDecoration = "line-through";
+const Complete = (chk) => {
+    const parent = chk.parentNode;
+    const text = parent.children[1];
+    if (chk.checked == true) {
+        text.style.textDecoration = "line-through";
     } else {
-        var parent = check.parentNode;
-        var Span = parent.getElementsByTagName("span");
-        Span.classList.add("none");
+        text.style.textDecoration = "none";
     }
+
+
 }
-const addTask = () => {
+const addTask = (event) => {
+    event.preventDefault();
     const inputValue = Input.value;
-    console.log(inputValue);
+
     let task = `<div id="task">
-                <input type="checkbox" onclick="Complete(this)" id="check">
-                <span id="task-content" class="span">${inputValue}</span>
+                <input type="checkbox" onClick="Complete(this)" id="check">
+                <span id="content" class="span">${inputValue}</span>
                <button id="delete" onclick="deleteTask(this)" style="float: right">
                     <i class="far fa-trash-alt"></i>
                 </button>      </div>`
@@ -47,7 +46,6 @@ const addTask = () => {
 
     Input.value = "";
     disableBtn();
-
 }
 
 const deleteTask = (button) => {
@@ -60,5 +58,6 @@ const deleteTask = (button) => {
         grand_parent.removeChild(parent);
     }, 200);
 }
+
 addBtn.onclick = addTask;
 Input.onkeyup = activateButton;
